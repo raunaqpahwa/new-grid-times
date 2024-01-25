@@ -1,9 +1,10 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
+import { QUERIES } from "../../constants";
 
 const OpinionStory = ({ id, title, author, avatar }) => {
   return (
-    <a href={`/story/${id}`}>
+    <OpinionStoryLink href={`/story/${id}`}>
       <Wrapper>
         <Avatar alt="" src={avatar} />
         <div>
@@ -11,12 +12,38 @@ const OpinionStory = ({ id, title, author, avatar }) => {
           <ArticleTitle>{title}</ArticleTitle>
         </div>
       </Wrapper>
-    </a>
+    </OpinionStoryLink>
   );
 };
 
 const Wrapper = styled.article`
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: flex-start;
   color: var(--color-gray-900);
+
+  @media ${QUERIES.tabletOnly} {
+    display: initial;
+  }
+`;
+
+const OpinionStoryLink = styled.a`
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-gray-300);
+
+  &:last-of-type {
+    border: none;
+  }
+
+  &:first-of-type {
+    padding-top: 0px;
+  }
+
+  @media ${QUERIES.tabletOnly} {
+    padding: 0;
+    border: none;
+  }
 `;
 
 const Avatar = styled.img`
@@ -25,6 +52,11 @@ const Avatar = styled.img`
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
+  margin-left: 16px;
+
+  @media ${QUERIES.tabletOnly} {
+    margin-left: 0px;
+  }
 `;
 
 const AuthorName = styled.p`
@@ -32,12 +64,20 @@ const AuthorName = styled.p`
   font-weight: var(--font-weight-medium);
   color: var(--color-gray-700);
   margin-bottom: 4px;
+
+  @media ${QUERIES.tabletOnly} {
+    margin-top: 4px;
+  }
 `;
 
 const ArticleTitle = styled.h3`
   font-size: 1.125rem;
   font-weight: var(--font-weight-bold);
   line-height: 1.3;
+
+  @media ${QUERIES.tabletAndUp} {
+    margin-top: -4px;
+  }
 `;
 
 export default OpinionStory;
